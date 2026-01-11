@@ -1,0 +1,675 @@
+/* Basic Reset */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    line-height: 1.5;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%; /* Ensure body takes full viewport height */
+    overflow: hidden; /* Prevent body scrolling, allow inner panels to scroll */
+}
+
+#root {
+    height: 100vh; /* Make root element take full viewport height */
+    display: flex;
+    flex-direction: column; /* Stack header, action buttons, app-container, footer vertically */
+}
+
+/* Header Styles */
+.app-header {
+    background-color: #2c3e50; /* Dark blue-grey */
+    color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column; /* Stack logo/text and help button on mobile */
+    align-items: center; /* Center items horizontally */
+    gap: 0.75rem; /* Space between stacked elements */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.app-header .header-left {
+    display: flex;
+    flex-direction: column; /* Stack logo and text container on mobile */
+    align-items: center;
+    text-align: center;
+}
+
+.app-header .app-logo-img {
+    height: 40px; /* Adjust size as needed */
+    width: auto;
+    margin-right: 0; /* No right margin on stacked mobile view */
+    margin-bottom: 0.5rem; /* Space below logo on stacked mobile view */
+}
+
+.app-branding-text {
+    display: flex;
+    flex-direction: column; /* Stack title, tagline, byline */
+    align-items: flex-start; /* Default to start alignment */
+}
+
+.app-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.app-tagline {
+    font-size: 0.9rem;
+    color: #e0e0e0; /* Lighter grey for tagline */
+    margin-bottom: 0.2rem;
+}
+
+.app-byline { /* This class is no longer used in the header but kept for reference */
+    font-size: 0.8rem;
+    color: #e0e0e0; /* Lighter grey for byline */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.app-byline:hover {
+    color: #ffc107; /* Amber on hover */
+    text-decoration: underline;
+}
+
+.help-button {
+    background-color: #ffc107; /* Amber */
+    color: #333;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.help-button:hover {
+    background-color: #ffca28; /* Lighter amber */
+    transform: translateY(-1px);
+}
+.help-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+
+/* Action Buttons Styles */
+.action-buttons-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+    justify-content: center; /* Center buttons on mobile */
+    gap: 1rem; /* Space between buttons */
+    padding: 1rem;
+    background-color: #f0f2f5; /* Light grey background */
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: inset 0 -1px 3px rgba(0,0,0,0.05);
+    flex-shrink: 0; /* Prevent action buttons from shrinking */
+    position: relative; /* For positioning button groups */
+    z-index: 10; /* Ensure button groups are above other content */
+}
+
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.action-button i {
+    margin-right: 0.5rem;
+}
+
+.action-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.action-button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.action-button:disabled {
+    background-color: #cccccc;
+    color: #888888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.primary-button {
+    background-color: #007bff; /* Blue */
+    color: white;
+}
+
+.primary-button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.secondary-button {
+    background-color: #6c757d; /* Grey */
+    color: white;
+}
+
+.secondary-button:hover:not(:disabled) {
+    background-color: #5a6268;
+}
+
+.danger-button {
+    background-color: #dc3545; /* Red */
+    color: white;
+}
+
+.danger-button:hover:not(:disabled) {
+    background-color: #c82333;
+}
+
+/* Specific for small buttons within template modal */
+.action-button.small-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
+}
+
+/* Action Button Groups for Import/Export dropdowns */
+.action-button-group {
+    position: relative;
+    display: inline-block;
+}
+
+.sub-button-group {
+    position: absolute;
+    top: 100%; /* Position below the main button */
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    min-width: 150px; /* Ensure enough width for text */
+    z-index: 100; /* Above other elements */
+    padding: 0.5rem 0;
+    margin-top: 0.5rem; /* Space between parent button and dropdown */
+}
+
+.sub-button-group .sub-button {
+    width: 100%;
+    border-radius: 0;
+    background-color: #fff;
+    color: #333;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    box-shadow: none;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.sub-button-group .sub-button:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+    transform: none; /* No transform for sub-buttons */
+    box-shadow: none;
+}
+
+/* General App Container Layout */
+.app-container {
+    display: flex;
+    flex-direction: column; /* Stacks editor and preview vertically on small screens */
+    width: 100%;
+    flex-grow: 1; /* Allow app-container to fill remaining vertical space */
+    overflow: hidden; /* Prevent scrolling of app-container itself, allow children to scroll */
+}
+
+.editor-panel {
+    flex: 1 1 50%; /* Takes roughly half height on mobile */
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    min-height: 200px; /* Ensure editor is visible */
+}
+
+.preview-panel {
+    flex: 1 1 50%; /* Takes roughly half height on mobile */
+    background-color: #fdfdfd;
+    overflow: auto; /* Allow scrolling for preview content */
+    padding: 1rem;
+    display: flex; /* Enable flex for title and iframe */
+    flex-direction: column; /* Stack title and iframe */
+}
+
+.preview-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #34495e;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center; /* Center on mobile, left on desktop */
+}
+
+.editor-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.editor-tab-button {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #555;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    white-space: nowrap; /* Prevent wrapping */
+    border-radius: 5px 5px 0 0;
+    margin-right: 2px;
+}
+
+.editor-tab-button:hover {
+    color: #007bff;
+    background-color: #eceff1;
+}
+
+.editor-tab-button.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    font-weight: 500;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+}
+
+.editor-content {
+    flex-grow: 1;
+    display: flex;
+    position: relative; /* For absolutely positioned textarea */
+}
+
+.editor-textarea {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: none;
+    resize: none;
+    outline: none;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+}
+.editor-textarea::placeholder {
+    color: #999;
+}
+
+iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: #fff; /* White background for the resume */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow for the preview */
+    flex-grow: 1; /* Allow iframe to fill remaining space */
+}
+
+/* Footer Styles */
+.app-footer {
+    background-color: #2c3e50; /* Dark blue-grey, same as header */
+    color: #e0e0e0; /* Lighter grey */
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column; /* Stack items on mobile */
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+.app-footer-logo {
+    height: 25px; /* Smaller mascot in footer */
+    width: auto;
+    margin-right: 0; /* No margin on mobile */
+}
+
+.app-footer a {
+    color: #ffc107; /* Amber link */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.app-footer a:hover {
+    text-decoration: underline;
+    color: #ffca28;
+}
+
+
+/* Desktop / Tablet Styles (side-by-side layout) */
+@media (min-width: 768px) {
+    .app-header {
+        flex-direction: row; /* Align logo/text and help button horizontally */
+        justify-content: space-between; /* Space them out */
+    }
+
+    .app-header .header-left {
+        flex-direction: row; /* Align logo and text horizontally */
+        align-items: center;
+        text-align: left; /* Align text left */
+    }
+
+    .app-header .app-logo-img {
+        margin-bottom: 0; /* Remove bottom margin on desktop */
+        margin-right: 0.75rem; /* Add more space on desktop */
+    }
+
+    .app-header .app-branding-text {
+        flex-direction: row; /* Align title, tagline horizontally */
+        align-items: baseline; /* Align text baselines */
+        margin-left: 0; /* No extra left margin as logo has right margin */
+    }
+
+    .app-title {
+        margin-bottom: 0;
+        margin-right: 0.75rem; /* Space between title and tagline */
+        font-size: 1.8rem; /* Larger title on desktop */
+    }
+
+    .app-tagline {
+        margin-bottom: 0;
+        font-size: 1rem; /* Adjust tagline size */
+    }
+    .app-byline { /* This class is no longer used in the header */
+        font-size: 0.9rem; /* Adjust byline size */
+    }
+
+    .action-buttons-container {
+        justify-content: flex-start; /* Align buttons to start on desktop */
+    }
+
+    /* === FIX: Desktop app-container layout === */
+    .app-container {
+        flex-direction: row; /* Arrange editor and preview side-by-side */
+        align-items: stretch; /* Make both panels take full height */
+    }
+
+    .editor-panel {
+        flex: 1; /* Takes equal width */
+        border-bottom: none;
+        border-right: 1px solid #eee;
+        min-width: 300px; /* Ensure editor is not too small */
+    }
+
+    .preview-panel {
+        flex: 1; /* Takes equal width */
+        padding: 1.5rem;
+    }
+
+    .preview-title {
+        text-align: left; /* Align title left on desktop */
+    }
+
+    .app-footer {
+        flex-direction: row; /* Align items horizontally */
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .app-footer-logo {
+        margin-right: 0.25rem; /* Small space between logo and text */
+    }
+}
+
+/* =============================================================================================
+   Modal Styles for Template Management and Help Modal (reused)
+   ============================================================================================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure modal is on top of other content */
+    padding: 1rem; /* Padding for mobile screens */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 600px; /* Max width for desktop */
+    max-height: 90vh; /* Max height to prevent overflow on tall screens */
+    overflow-y: auto; /* Allow scrolling within modal if content is long */
+    position: relative;
+    outline: none; /* Remove default focus outline */
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.75rem;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #888;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s ease-in-out;
+}
+
+.modal-close-button:hover {
+    color: #333;
+}
+
+.modal-section {
+    margin-bottom: 2rem;
+}
+
+.modal-section h3 {
+    color: #34495e;
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.template-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.template-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+.template-list li:last-child {
+    margin-bottom: 0;
+}
+
+.template-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.save-template-form {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.save-template-form input[type="text"] {
+    flex-grow: 1;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1rem;
+    min-width: 150px; /* Ensure input is not too small on mobile */
+}
+
+.save-template-form input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Responsive adjustments for modal */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 1.5rem;
+        margin: 0 10px; /* Keep some margin on very small screens */
+        max-width: 100%;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .modal-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .template-list li {
+        flex-direction: column; /* Stack name and buttons */
+        align-items: flex-start;
+        padding-bottom: 0.5rem;
+    }
+
+    .template-list li span {
+        margin-bottom: 0.5rem; /* Space between name and buttons */
+        font-weight: 600;
+        width: 100%; /* Take full width */
+    }
+
+    .template-actions {
+        width: 100%; /* Make buttons take full width */
+        justify-content: stretch; /* Stretch buttons */
+    }
+    .template-actions .action-button {
+        flex: 1; /* Distribute space evenly */
+    }
+
+    .save-template-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .save-template-form input {
+        width: 100%;
+        min-width: unset;
+    }
+    .save-template-form .action-button {
+        width: 100%;
+    }
+}
+
+/* Styles for Help Content within modal */
+.help-content-body {
+    padding: 1rem 0;
+    line-height: 1.6;
+    color: #444;
+}
+
+.help-content-body h1 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 0.5em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5em;
+}
+
+.help-content-body h2 {
+    font-size: 1.6em;
+    color: #34495e;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 0.25em;
+}
+
+.help-content-body h3 {
+    font-size: 1.3em;
+    color: #34495e;
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+}
+
+.help-content-body p {
+    margin-bottom: 1em;
+}
+
+.help-content-body ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 1em;
+}
+
+.help-content-body li {
+    margin-bottom: 0.5em;
+}
+
+.help-content-body a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.help-content-body a:hover {
+    text-decoration: underline;
+}
+
+.help-content-body hr {
+    border: none;
+    border-top: 1px dashed #ccc;
+    margin: 2em 0;
+}
+
+/* Styling for images within help content to prevent them from being too large */
+.help-content-body img {
+    max-width: 150px; /* Constrain width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Center block images */
+    margin: 1em auto; /* Center with some margin */
+    border-radius: 5px; /* Slightly rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
