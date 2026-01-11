@@ -71,7 +71,9 @@ const ResumePreview = React.forwardRef<HTMLIFrameElement, ResumePreviewProps>(
         ref={iframeRef}
         title="Resume Preview"
         onLoad={handleIframeLoad}
-        sandbox="allow-same-origin allow-scripts"
+        // Removed allow-scripts to prevent potential sandbox escape and address console warning
+        // allow-same-origin is kept as it's often necessary for direct DOM manipulation like contentDocument.write
+        sandbox="allow-same-origin" 
       />
     );
   }
@@ -735,6 +737,7 @@ export const App: React.FC = () => {
   );
   const [activeEditorTab, setActiveEditorTab] = useState<'markdown' | 'css'>('markdown');
   const previewIframeRef = useRef<HTMLIFrameElement>(null); // Reference to the iframe for PDF/HTML export
+  // Fix: Corrected useState destructuring from `[value, setValue = useState(false)]` to `[value, setValue] = useState(false)`
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const [copyHtmlFeedback, setCopyHtmlFeedback] = useState('');
   const [showHelpModal, setShowHelpModal] = useState(false); // New state for Help Modal
@@ -752,6 +755,7 @@ export const App: React.FC = () => {
   });
 
   // File Import/Export States
+  // Fix: Corrected useState destructuring from `[value, setValue = useState(false)]` to `[value, setValue] = useState(false)`
   const [showImportOptions, setShowImportOptions] = useState(false);
   const [showExportOptions, setShowExportOptions] = useState(false);
   const markdownInputRef = useRef<HTMLInputElement>(null);
