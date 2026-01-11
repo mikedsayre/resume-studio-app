@@ -1,6 +1,6 @@
 # Welcome to Resume Studio!
 
-![Resume Studio Mascot](images/resume-studio-logo-256px.png)
+![Resume Studio Mascot](/images/resume-studio-mascot-256px.png)
 
 Resume Studio helps you craft professional resumes with ease using Markdown for content and custom CSS for styling. See your changes instantly in the live preview!
 

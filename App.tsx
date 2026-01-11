@@ -3,7 +3,7 @@ import { marked } from 'marked'; // Using 'marked' for Markdown parsing
 import html2canvas from 'html2canvas'; // Import html2canvas
 import { jsPDF } from 'jspdf'; // Import jsPDF
 import HelpModal from './HelpModal'; // Import the new HelpModal component
-import { LOGO_IMAGE_PATH, MASCOT_IMAGE_PATH } from './constants'; // Import image paths
+import { HEADER_LOGO_PATH, FOOTER_LOGO_PATH } from './constants'; // Import image paths
 
 // Ensure markdown parsing is safe
 marked.use({
@@ -111,7 +111,7 @@ const Header: React.FC<HeaderProps> = ({ onHelpClick }) => {
     <header className="app-header">
       <div className="header-left">
         <img 
-          src={LOGO_IMAGE_PATH} 
+          src={HEADER_LOGO_PATH} 
           alt="Resume Studio Logo - Robot holding resume" 
           className="app-logo-img" 
         />
@@ -1145,7 +1145,7 @@ export const App: React.FC = () => {
       <HelpModal show={showHelpModal} onClose={() => setShowHelpModal(false)} />
 
       <footer className="app-footer">
-        <img src={MASCOT_IMAGE_PATH} alt="Resume Studio Mascot" className="app-footer-logo" />
+        <img src={FOOTER_LOGO_PATH} alt="Resume Studio Mascot" className="app-footer-logo" />
         <span>
           &copy; {new Date().getFullYear()} Built by{' '}
           <a href="https://swanlakedigital.com" target="_blank" rel="noopener noreferrer">

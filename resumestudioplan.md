@@ -57,7 +57,7 @@ The application will follow a standard React single-page application (SPA) archi
 *   `viewport` meta tag for mobile responsiveness.
 *   Links to `index.css` for application styling.
 *   Includes `font-awesome` for icons.
-*   **Favicon Path**: The `href` for the favicon will be explicitly set to `images/favicon-64px.png` to ensure correct resolution when the `public` directory serves as the root.
+*   **Favicon Path**: The `href` for the favicon will be explicitly set to `images/resume-studio-mascot-64px.png` to ensure correct resolution when the `public` directory serves as the root.
 
 ### 4.2. `index.css`
 *   Contains all global and application-specific CSS rules for the main UI, including modal styles, specific styles for help content, and new styles for button groups (dropdown containers, sub-buttons), and the new footer. Includes responsive design for all elements.
@@ -97,13 +97,13 @@ The application will follow a standard React single-page application (SPA) archi
     *   **File Import**: Uses hidden `input type="file"` elements and `FileReader` to allow users to select and load `.md` or `.css` files into the respective editors.
     *   **File Export**: Creates `Blob` objects from the current Markdown and CSS content and triggers a download of `.md` or `.css` files.
     *   The "Import" and "Export" buttons will reveal sub-options for Markdown and CSS to maintain a cleaner main action bar.
-*   **Asset Paths**: Image paths will be managed by `constants.ts` and referenced by components. **It is crucial that the `public/images` directory (containing `resume-studio-logo-256px.png`, `favicon-64px.png`) is created and these image files are placed there. Your web server must be configured to serve static assets from this `public` directory, making `images/` the effective root for these assets. The `MASCOT_IMAGE_PATH` constant is now aligned with `LOGO_IMAGE_PATH` to refer to the primary 256px mascot image.**
+*   **Asset Paths**: Image paths will be managed by `constants.ts` and referenced by components. **It is crucial that the `public/images` directory (containing `resume-studio-mascot-256px.png`, `resume-studio-mascot-64px.png`) is created and these image files are placed there. Your web server must be configured to serve static assets from this `public` directory, making `images/` the effective root for these assets.**
 
 ### 4.5. `HelpContent.md`
-*   Contains the Markdown-formatted help documentation, updated with a new section for Import/Export and the application mascot image.
+*   Contains the Markdown-formatted help documentation, updated with a new section for Import/Export and the application mascot image. **This file MUST be moved into the `public/` directory for the `fetch` call in `HelpModal.tsx` to succeed in a production environment like Vercel.**
 
 ### 4.6. `constants.ts`
-*   Centralizes image paths and other potential constants for easy management and consistency across the application.
+*   Centralizes image paths and other potential constants for easy management and consistency across the application, with updated constant names and image filenames.
 
 ## 5. Excluded Features (for current phase, based on user input)
 
